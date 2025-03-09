@@ -151,14 +151,16 @@ Implemented Prophet for a more flexible, trend-aware forecasting approach.
 ![image](https://github.com/user-attachments/assets/e1794d3f-253f-4560-8b81-d418ef8acd0b)
 
 
-Model Evaluation
+
+  
+# Results
+
+### Model Evaluation
 Metrics Used:
 
 - Mean Absolute Error (MAE)
 - Mean Absolute Percentage Error (MAPE)
   
-# Results
-
 | Model                     | MAE  | MAPE  |  
 |---------------------------|------|------|  
 | **ARIMA (p=13, d=1, q=19)** | 668  | 1.51% |  
@@ -166,7 +168,7 @@ Metrics Used:
 | **Prophet**                | 714  | **0.94%** | 
 
 # Conclusion
-Since birth counts range between 6,000 and 13,000, MAPE is the most meaningful metric.
-Best Model: Prophet (MAPE = 0.94%) — it generalizes better across different birth values.
-ARIMA had a lower MAE but a higher MAPE, making it less optimal for relative error evaluation.
+- Since birth counts range between 6,000 and 13,000, MAPE is the most meaningful metric.
+- Best Model: Prophet (MAPE = 0.94%) — it generalizes better across different birth values.
+- ARIMA had a lower MAE but a higher MAPE, making it less optimal for relative error evaluation.
 
