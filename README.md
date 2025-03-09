@@ -137,6 +137,12 @@ Used auto_arima to automate hyperparameter selection:
 
 
 Performed diagnostic plotting to validate model performance.
+### SARIMA
+![image](https://github.com/user-attachments/assets/2b9f06ad-b09b-4bc6-a98b-0e3dfb1883dc)
+
+### ARIMA
+![image](https://github.com/user-attachments/assets/bb4287c7-04f0-43a3-b0ab-737c1ea64243)
+
 
 ## 4. Facebook Prophet
 Implemented Prophet for a more flexible, trend-aware forecasting approach.
