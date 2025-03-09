@@ -156,12 +156,14 @@ Metrics Used:
 
 - Mean Absolute Error (MAE)
 - Mean Absolute Percentage Error (MAPE)
-- 
+  
 # Results
-Model	MAE	MAPE
-ARIMA (p=13, d=1, q=19)	668	1.51%
-SARIMA (auto-selected)	765.6	1.78%
-Prophet	714	0.94%
+
+| Model                     | MAE  | MAPE  |  
+|---------------------------|------|------|  
+| **ARIMA (p=13, d=1, q=19)** | 668  | 1.51% |  
+| **SARIMA (auto-selected)**  | 765.6 | 1.78% |  
+| **Prophet**                | 714  | **0.94%** | 
 
 # Conclusion
 Since birth counts range between 6,000 and 13,000, MAPE is the most meaningful metric.
