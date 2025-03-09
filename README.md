@@ -6,7 +6,7 @@ This project focuses on time series forecasting for the daily number of births i
 The dataset consists of daily birth counts for the year 2015.
 After preprocessing, the dataset was structured with the date as the index and the number of births as the column.
 # Exploratory Data Analysis (EDA)
-- check for nulls
+- Check for nulls, duplicates (no null or duplicate values were found)
 - Statistical Summary: Used .describe() to observe key statistics.
 - Transform our series datetime and specify datetime as index.
 - Visualization: A violin plot was created to understand distribution and variability.
@@ -25,6 +25,9 @@ In time series analysis, additive and multiplicative models are two common appro
 - Residual (or Noise): The irregular, random fluctuations that cannot be explained by trend or seasonality.
 
 The choice between an additive or multiplicative model depends on how these components interact with each other in the data.
+
+![image](https://github.com/user-attachments/assets/fdd0f9a0-5eba-4f9e-b1a6-8f7f24f5084d)
+
 - If the seasonal fluctuations grow or shrink over time, we use a multiplicative model.
 - If the seasonal fluctuations are constant, we use an additive model.
 
