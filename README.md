@@ -26,6 +26,7 @@ Best ARIMA model: (p=13, d=1, q=19).
 ## 3. SARIMA (Seasonal ARIMA)
 Used auto_arima to automate hyperparameter selection:
 ![image](https://github.com/user-attachments/assets/99cd4419-a101-4108-bfbe-79a163a90308)
+
 Performed diagnostic plotting to validate model performance.
 4. Facebook Prophet
 Implemented Prophet for a more flexible, trend-aware forecasting approach.
