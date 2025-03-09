@@ -28,7 +28,7 @@ The choice between an additive or multiplicative model depends on how these comp
 - If the seasonal fluctuations grow or shrink over time, we use a multiplicative model.
 - If the seasonal fluctuations are constant, we use an additive model.
 
-![image.png](attachment:image.png)
+![image](https://github.com/user-attachments/assets/b45f9a8c-4c7c-4daf-8961-d2767a8bcdc3)
 
 ![image](https://github.com/user-attachments/assets/fb86e2e3-e5f6-4960-831f-27e9b25dc9b8)
 1. Original Data (Top Plot - "births")
@@ -96,37 +96,64 @@ It is observed that we do not have a stationary series.
 
 ![image](https://github.com/user-attachments/assets/9f5f00e9-4697-4c99-bba6-4cc66d9f5871)
 ![image](https://github.com/user-attachments/assets/33c1c921-2783-4b66-8782-bf2b3893899e)
+
 Time series is now stationary:
 - Mean seems stable over time and around zero now. Std seems more stable too.
 - Test Statistic: -9.65 (way lower than all critical values)
 - p-value: 1.41e-16 (<< 0.05, meaning we reject H0)
+  
 # Modeling Approaches
 ## 1. Naive Model (Baseline)
 Assumes "What happened yesterday will happen tomorrow."
-Used as a benchmark for comparison.
+
+![image](https://github.com/user-attachments/assets/7ed9ec66-863c-463e-8723-e930bf704f59)
+
+MSE: 9421121.5 , not a good result.
+
 ## 2. ARIMA (AutoRegressive Integrated Moving Average)
 Chose d = 1 based on the differenced dataset.
 ACF and PACF plots were analyzed to select p and q.
+
+![image](https://github.com/user-attachments/assets/e2f2408f-ff99-4567-9955-55744ba8e251)
+
 Data was split into train (330 rows) and test (34 rows).
+
+![image](https://github.com/user-attachments/assets/79fd8b3d-d336-47dd-b428-26e0881a0978)
+
 Experimented with different (p, d, q) combinations for ARIMA.
+
+
 Best ARIMA model: (p=13, d=1, q=19).
+![image](https://github.com/user-attachments/assets/93258cc9-7667-4a20-b1f0-146d0268835e)
+
 ## 3. SARIMA (Seasonal ARIMA)
 Used auto_arima to automate hyperparameter selection:
-![image](https://github.com/user-attachments/assets/99cd4419-a101-4108-bfbe-79a163a90308)
+
+![image](https://github.com/user-attachments/assets/bf4e92ea-ed30-4b29-8ff5-36b4b94025f3)
+![image](https://github.com/user-attachments/assets/683f57c5-dfe2-4db2-b267-d9b7e790cc0d)
+
 
 Performed diagnostic plotting to validate model performance.
+
 4. Facebook Prophet
 Implemented Prophet for a more flexible, trend-aware forecasting approach.
+
+![image](https://github.com/user-attachments/assets/86ab5418-6c55-4bfb-aa75-a1f7c91e0f16)
+![image](https://github.com/user-attachments/assets/e1794d3f-253f-4560-8b81-d418ef8acd0b)
+
+
 Model Evaluation
 Metrics Used:
 
 - Mean Absolute Error (MAE)
 - Mean Absolute Percentage Error (MAPE)
+- 
 # Results
 Model	MAE	MAPE
 ARIMA (p=13, d=1, q=19)	668	1.51%
 SARIMA (auto-selected)	765.6	1.78%
 Prophet	714	0.94%
+
 # Conclusion
 Since birth counts range between 6,000 and 13,000, MAPE is the most meaningful metric.
 Best Model: Prophet (MAPE = 0.94%) — it generalizes better across different birth values.
