@@ -1,6 +1,6 @@
 # Time Series Forecasting: Daily Births in 2015
 ## Project Overview
-This project focuses on time series forecasting for the daily number of births in 2015. The objective was to analyze the data, ensure stationarity and build predictive models using ARIMA, SARIMA and Prophet to determine the best approach.
+This project focuses on time series forecasting for the daily number of births in 2015. The objective was to analyze the data, ensure stationarity and build predictive models using ARIMA and SARIMA  to determine the best approach.
 
 # Data Description
 The dataset consists of daily birth counts for the year 2015.
@@ -35,7 +35,7 @@ The choice between an additive or multiplicative model depends on how these comp
 
 ![image](https://github.com/user-attachments/assets/fb86e2e3-e5f6-4960-831f-27e9b25dc9b8)
 1. Original Data (Top Plot - "births")
-- There is strong seasonality with peaks and troughs repeating at regular intervals.
+- x: date, y: number of births
 - The overall trend appears to be increasing at certain points and decreasing at others.
 
 2. Trend Component (Second Plot - "Trend")
@@ -45,17 +45,14 @@ The choice between an additive or multiplicative model depends on how these comp
 
 3. Seasonal Component (Third Plot - "Seasonal")
 
-- The pattern repeats in a consistent and periodic manner.
-- Since I used period=12, this suggests that births exhibit a monthly seasonality effect.
-- The seasonal fluctuations are roughly stable in amplitude, which is typical in an additive model.
+- It is not clear if the pattern is repeated.
+- Since I used period=52, this suggests that births might exhibit a weekly seasonality effect.
+
 
 4. Residual Component (Bottom Plot - "Resid")
-
+- In time series decomposition, residuals represent the portion of the time series that remains after removing the trend and seasonal components.
 - Residuals (random noise) should ideally be randomly scattered around zero with no clear pattern.
-- Here, the spread of residuals seems wider at certain points, which might suggest some heteroscedasticity (variance changes over time).
 
-Conclusions:
-The data seem not stationary due to the clear trend and seasonality.
 
 # Stationarity Check & Transformation
 - In order a timeseires to be more easily forecasted, it should be stationary.
@@ -89,9 +86,9 @@ It is observed that we do not have a stationary series.
 - Unlike before, the trend component is much less pronounced and fluctuates around zero.
 
 3. Seasonal Component (Third Plot)
-- The seasonality remains strong and unchanged, which makes sense because differencing only removes trends, not seasonal patterns.
+-  Seasonality still is not clear if exists.
 
-4. Residual Component (Fourth Plot)
+5. Residual Component (Fourth Plot)
 - Ideally, residuals should look like white noise (randomly scattered points with no pattern).
 - My residuals still show some variation and structure, suggesting the model might still capture some patterns.
 
@@ -114,43 +111,31 @@ Assumes "What happened yesterday will happen tomorrow."
 MSE: 9421121.5 , not a good result.
 
 ## 2. ARIMA (AutoRegressive Integrated Moving Average)
-Chose d = 1 based on the differenced dataset.
+Chose d = 1 based on the differenced dataset, this will transform the data to stationary.
 ACF and PACF plots were analyzed to select p and q.
 
-![image](https://github.com/user-attachments/assets/e2f2408f-ff99-4567-9955-55744ba8e251)
+![image](https://github.com/user-attachments/assets/2e0071a8-8f72-4c54-b064-cc714b98be36)
 
-Data was split into train (330 rows) and test (34 rows).
 
-![image](https://github.com/user-attachments/assets/79fd8b3d-d336-47dd-b428-26e0881a0978)
+Original Data (not stationary) was split into train (330 rows) and test (35 rows).
+
+![image](https://github.com/user-attachments/assets/d5e23f97-adf1-4372-a13e-420e63775bae)
+
 
 Experimented with different (p, d, q) combinations for ARIMA.
+1. ![image](https://github.com/user-attachments/assets/4964bc7b-1b40-4ef1-8f24-eac01f4efc87)
+2. ![image](https://github.com/user-attachments/assets/4597f6c6-e421-49a7-8dc4-f149469a3282)
+3. ![image](https://github.com/user-attachments/assets/59b541a1-51be-456c-aa81-5c2ffd41874e)
 
 
 Best ARIMA model: (p=13, d=1, q=19).
-![image](https://github.com/user-attachments/assets/93258cc9-7667-4a20-b1f0-146d0268835e)
+![image](https://github.com/user-attachments/assets/a7ff0304-c380-4080-881d-8bad0497d6ec)
+
 
 ## 3. SARIMA (Seasonal ARIMA)
 Used auto_arima to automate hyperparameter selection:
 
-![image](https://github.com/user-attachments/assets/bf4e92ea-ed30-4b29-8ff5-36b4b94025f3)
-![image](https://github.com/user-attachments/assets/683f57c5-dfe2-4db2-b267-d9b7e790cc0d)
-
-
-Performed diagnostic plotting to validate model performance.
-### SARIMA
-![image](https://github.com/user-attachments/assets/2b9f06ad-b09b-4bc6-a98b-0e3dfb1883dc)
-
-### ARIMA
-![image](https://github.com/user-attachments/assets/bb4287c7-04f0-43a3-b0ab-737c1ea64243)
-
-
-## 4. Facebook Prophet
-Implemented Prophet for a more flexible, trend-aware forecasting approach.
-
-![image](https://github.com/user-attachments/assets/86ab5418-6c55-4bfb-aa75-a1f7c91e0f16)
-![image](https://github.com/user-attachments/assets/e1794d3f-253f-4560-8b81-d418ef8acd0b)
-
-
+![image](https://github.com/user-attachments/assets/b51fb949-f84d-456c-b66a-cf69b598b205)
 
   
 # Results
@@ -159,16 +144,14 @@ Implemented Prophet for a more flexible, trend-aware forecasting approach.
 Metrics Used:
 
 - Mean Absolute Error (MAE)
-- Mean Absolute Percentage Error (MAPE)
+
   
-| Model                     | MAE  | MAPE  |  
-|---------------------------|------|------|  
-| **ARIMA (p=13, d=1, q=19)** | 668  | 1.51% |  
-| **SARIMA (auto-selected)**  | 765.6 | 1.78% |  
-| **Prophet**                | 714  | **0.94%** | 
+| Model                     | MAE  | 
+|---------------------------|------|
+| **ARIMA (p=13, d=1, q=19)** | 668  |
+| **SARIMA (auto-selected)**  | 5433.03 |
+
 
 # Conclusion
-- Since birth counts range between 6,000 and 13,000, MAPE is the most meaningful metric.
-- Best Model: Prophet (MAPE = 0.94%) — it generalizes better across different birth values.
-- ARIMA had a lower MAE but a higher MAPE, making it less optimal for relative error evaluation.
+Model  - ARIMA (p =13, d=1, q=19) has the lowest MAE (948.76) 
 
