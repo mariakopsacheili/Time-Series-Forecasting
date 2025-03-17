@@ -33,7 +33,15 @@ The choice between an additive or multiplicative model depends on how these comp
 
 ![image](https://github.com/user-attachments/assets/b45f9a8c-4c7c-4daf-8961-d2767a8bcdc3)
 
-![image](https://github.com/user-attachments/assets/fb86e2e3-e5f6-4960-831f-27e9b25dc9b8)
+### statsmodels.tsa.seasonal.seasonal_decompose
+- The requirement that "x must contain 2 complete cycles" means that my time series data should include at least two full periods of the seasonal component I am trying to analyze.
+- For weekly seasonality, I have 52 weeks in a year, which is more than 2 complete cycles.
+- For monthly seasonality, I have 12 months, which is also more than 2 complete cycles.
+- I will check weekly.
+  
+  ![image](https://github.com/user-attachments/assets/d4d1cdc0-65bb-4784-9f29-8a208a60854c)
+
+  
 1. Original Data (Top Plot - "births")
 - x: date, y: number of births
 - The overall trend appears to be increasing at certain points and decreasing at others.
@@ -64,26 +72,25 @@ The choice between an additive or multiplicative model depends on how these comp
 
 If the p-value is low (< 0.05) and the test statistic is smaller than the critical values, we reject H₀ and conclude that the series is stationary.
 
-![image](https://github.com/user-attachments/assets/40fb9200-7295-4510-b129-e5a2edfd5a94)
 
 ![image](https://github.com/user-attachments/assets/0cbe30c7-7de5-4c57-a75b-a08f1d5c911b)
 
 It is observed that we do not have a stationary series.
 
-1) The mean and standard deviation are not constant, meaning the series is non-stationary. 
-2) The p-value (0.4829) is much greater than the common significance levels (0.01, 0.05, or 0.10), further confirming that we cannot reject the null hypothesis.
-3) The test statistic (-1.6014) is higher than all the critical values (-3.449 at 1%, -2.869 at 5%, and -2.571 at 10%). This means we fail to reject the null hypothesis (H₀: The series has a unit root, meaning it is non-stationary).
+1) The p-value (0.4829) is much greater than the common significance levels (0.01, 0.05, or 0.10), further confirming that we cannot reject the null hypothesis.
+2) The test statistic (-1.6014) is higher than all the critical values (-3.449 at 1%, -2.869 at 5%, and -2.571 at 10%). This means we fail to reject the null hypothesis (H₀: The series has a unit root, meaning it is non-stationary).
 
 - Differencing (.diff()) was applied to remove trends and make the series stationary.
 # Re-evaluation:
 ## Plot again the decomposition to check the diffenced series
-![image](https://github.com/user-attachments/assets/d3b4a978-ebc2-4f04-a10a-ead41a634865)
+![image](https://github.com/user-attachments/assets/51e9bbb4-0c24-4131-ad98-a6c5feb23a6e)
+
 
 1. Observed Component (First Plot)
 - The original series is now more stationary, with fluctuations centered around zero.
 
 2. Trend Component (Second Plot)
-- Unlike before, the trend component is much less pronounced and fluctuates around zero.
+- There is not a specific trend.
 
 3. Seasonal Component (Third Plot)
 -  Seasonality still is not clear if exists.
@@ -94,11 +101,10 @@ It is observed that we do not have a stationary series.
 
 ## Check Stationarity again
 
-![image](https://github.com/user-attachments/assets/9f5f00e9-4697-4c99-bba6-4cc66d9f5871)
+
 ![image](https://github.com/user-attachments/assets/33c1c921-2783-4b66-8782-bf2b3893899e)
 
 Time series is now stationary:
-- Mean seems stable over time and around zero now. Std seems more stable too.
 - Test Statistic: -9.65 (way lower than all critical values)
 - p-value: 1.41e-16 (<< 0.05, meaning we reject H0)
   
