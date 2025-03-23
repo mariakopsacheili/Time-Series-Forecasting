@@ -158,5 +158,5 @@ Metrics Used:
 
 
 # Conclusion
-Model  - ARIMA (p =13, d=1, q=19) has the lowest MAE (948.76) 
+Model  - ARIMA (p =13, d=1, q=19) has the lowest MAE (948.76), so is the best choise.
 
