@@ -53,7 +53,6 @@ The choice between an additive or multiplicative model depends on how these comp
 
 3. Seasonal Component (Third Plot - "Seasonal")
 
-- It is not clear if the pattern is repeated.
 - Since I used period=52, this suggests that births might exhibit a weekly seasonality effect.
 
 
@@ -93,7 +92,7 @@ It is observed that we do not have a stationary series.
 - There is not a specific trend.
 
 3. Seasonal Component (Third Plot)
--  Seasonality still is not clear if exists.
+-  Seasonality still is seems to exists.
 
 5. Residual Component (Fourth Plot)
 - Ideally, residuals should look like white noise (randomly scattered points with no pattern).
